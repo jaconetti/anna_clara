@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+[data-hydration-error] {
+  display: none !important;
+}
+
+.gradient-pastel {
+  background: linear-gradient(135deg, #FFB3D9 0%, #B3D9FF 25%, #FFFACD 50%, #B3FFB3 75%, #D9B3FF 100%);
+}
+
+.gradient-pink-blue {
+  background: linear-gradient(135deg, #FFB3D9 0%, #B3D9FF 100%);
+}
+
+.gradient-blue-yellow {
+  background: linear-gradient(135deg, #B3D9FF 0%, #FFFACD 100%);
+}
+
+.gradient-yellow-green {
+  background: linear-gradient(135deg, #FFFACD 0%, #B3FFB3 100%);
+}
+
+.gradient-green-purple {
+  background: linear-gradient(135deg, #B3FFB3 0%, #D9B3FF 100%);
+}
+
+.gradient-purple-pink {
+  background: linear-gradient(135deg, #D9B3FF 0%, #FFB3D9 100%);
+}
+
+.shadow-elegant {
+  box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-elevated {
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-hover {
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 25px 70px -20px rgba(0, 0, 0, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #FF69B4 0%, #4169E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}

@@ -1,0 +1,23 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Participant {
+  id                    String   @id @default(cuid())
+  name                  String
+  whatsapp              String
+  estimatedBirthDate    DateTime
+  itemName              String?
+  pixValue              Int?
+  receiptPath           String?
+  createdAt             DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([estimatedBirthDate])
+}

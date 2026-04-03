@@ -1,0 +1,30 @@
+# Dependencies
+nextjs_space/node_modules/
+
+# Build output
+nextjs_space/.next/
+nextjs_space/out/
+
+# Environment variables
+nextjs_space/.env
+nextjs_space/.env.local
+nextjs_space/.env.development.local
+nextjs_space/.env.test.local
+nextjs_space/.env.production.local
+.env
+.env.local
+
+# Prisma generated client (will be generated on deploy)
+nextjs_space/node_modules/.prisma/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
