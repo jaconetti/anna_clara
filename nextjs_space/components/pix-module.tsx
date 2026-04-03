@@ -50,32 +50,20 @@ export default function PixModule({
       };
       reader.readAsDataURL(file);
 
-      const presignedResponse = await fetch('/api/upload/presigned', {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const uploadResponse = await fetch('/api/upload/presigned', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fileName: file.name,
-          contentType: file.type
-        })
-      });
-
-      if (!presignedResponse.ok) {
-        throw new Error('Erro ao gerar URL de upload');
-      }
-
-      const { uploadUrl, cloud_storage_path } = await presignedResponse.json();
-
-      const uploadResponse = await fetch(uploadUrl, {
-        method: 'PUT',
-        body: file,
-        headers: {
-          'Content-Type': file.type
-        }
+        body: formData,
       });
 
       if (!uploadResponse.ok) {
-        throw new Error('Erro ao fazer upload da imagem');
+        const err = await uploadResponse.json().catch(() => ({}));
+        throw new Error(err?.error ?? 'Erro ao fazer upload da imagem');
       }
+
+      const { cloud_storage_path } = await uploadResponse.json();
 
       onReceiptUpload(cloud_storage_path);
       setUploadError(null);

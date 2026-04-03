@@ -1,9 +1,5 @@
-import { PutObjectCommand, GetObjectCommand, DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { createS3Client, getBucketConfig } from "./aws-config";
-
-const client = createS3Client();
-const { bucketName, folderPrefix } = getBucketConfig();
+// Storage migrado para Vercel Blob (@vercel/blob)
+// Este arquivo mantido apenas para compatibilidade de imports existentes
 
 export async function generatePresignedUploadUrl(
   fileName: string,
