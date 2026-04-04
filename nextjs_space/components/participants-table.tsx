@@ -61,7 +61,7 @@ export default function ParticipantsTable() {
       <div className="text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
           <Users className="w-8 h-8" />
-          <span>👥 Participantes</span>
+          <span>Participantes</span>
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           {participants.length === 0 
