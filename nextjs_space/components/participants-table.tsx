@@ -82,80 +82,123 @@ export default function ParticipantsTable() {
           <p className="text-lg text-gray-500 mt-2">Mas você pode ser o primeiro! 🎁✨</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-3xl shadow-elegant border border-white border-opacity-50 overflow-hidden">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-200 bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100">
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎉</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">👤 Nome</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎰 Seu Palpite</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎁 Presente / Contribuição</th>
-                </tr>
-              </thead>
-              <tbody>
-                {participants.map((participant, index) => (
-                  <motion.tr
-                    key={participant?.id ?? `row-${index}`}
-                    custom={index}
-                    variants={rowVariants}
-                    initial="hidden"
-                    animate="visible"
-                    whileHover={{ backgroundColor: 'rgba(255, 179, 217, 0.2)' }}
-                    className="border-b border-gray-100 hover:shadow-sm transition-colors"
-                  >
-                    <td className="px-6 py-4 text-lg font-bold text-transparent bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text">
-                      {String(index + 1).padStart(2, '0')}
-                    </td>
-                    <td className="px-6 py-4">
-                      <div>
-                        <p className="font-bold text-gray-900 text-lg">{participant?.name ?? 'N/A'}</p>
-                        <p className="text-sm text-gray-500">📱 {participant?.whatsapp ?? 'N/A'}</p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      {participant?.estimatedBirthDate ? (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="inline-block px-3 py-1 bg-gradient-to-r from-purple-200 to-purple-300 text-purple-900 rounded-full text-sm font-bold shadow-md"
-                        >
-                          {new Date(participant.estimatedBirthDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
-                        </motion.div>
-                      ) : (
-                        <span className="text-gray-400">-</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4">
-                      {participant?.itemName ? (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="inline-block px-4 py-2 bg-gradient-to-r from-pink-200 to-pink-300 text-pink-900 rounded-full text-sm font-bold shadow-md"
-                        >
-                          🎀 {participant.itemName}
-                        </motion.span>
-                      ) : participant?.pixValue ? (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="inline-block px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-300 text-blue-900 rounded-full text-sm font-bold shadow-md"
-                        >
-                          💳 PIX Doado
-                        </motion.span>
-                      ) : (
-                        <span className="text-gray-400">-</span>
-                      )}
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
+        <>
+          {/* Mobile: cards */}
+          <div className="flex flex-col gap-3 md:hidden">
+            {participants.map((participant, index) => (
+              <motion.div
+                key={participant?.id ?? `card-${index}`}
+                custom={index}
+                variants={rowVariants}
+                initial="hidden"
+                animate="visible"
+                className="bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-elegant border border-white border-opacity-50 p-4 space-y-3"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-bold text-transparent bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="font-bold text-gray-900">{participant?.name ?? 'N/A'}</p>
+                    <p className="text-xs text-gray-500">📱 {participant?.whatsapp ?? 'N/A'}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {participant?.estimatedBirthDate && (
+                    <span className="px-3 py-1 bg-gradient-to-r from-purple-200 to-purple-300 text-purple-900 rounded-full text-xs font-bold shadow-sm">
+                      🎯 {new Date(participant.estimatedBirthDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                    </span>
+                  )}
+                  {participant?.itemName ? (
+                    <span className="px-3 py-1 bg-gradient-to-r from-pink-200 to-pink-300 text-pink-900 rounded-full text-xs font-bold shadow-sm">
+                      🎀 {participant.itemName}
+                    </span>
+                  ) : participant?.pixValue ? (
+                    <span className="px-3 py-1 bg-gradient-to-r from-blue-200 to-blue-300 text-blue-900 rounded-full text-xs font-bold shadow-sm">
+                      💳 PIX Doado
+                    </span>
+                  ) : null}
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </div>
+
+          {/* Desktop: table */}
+          <div className="hidden md:block overflow-x-auto">
+            <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-3xl shadow-elegant border border-white border-opacity-50 overflow-hidden">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100">
+                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎉</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">👤 Nome</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎯 Seu Palpite</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">🎁 Presente / Contribuição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {participants.map((participant, index) => (
+                    <motion.tr
+                      key={participant?.id ?? `row-${index}`}
+                      custom={index}
+                      variants={rowVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover={{ backgroundColor: 'rgba(255, 179, 217, 0.2)' }}
+                      className="border-b border-gray-100 hover:shadow-sm transition-colors"
+                    >
+                      <td className="px-6 py-4 text-lg font-bold text-transparent bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text">
+                        {String(index + 1).padStart(2, '0')}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="font-bold text-gray-900 text-lg">{participant?.name ?? 'N/A'}</p>
+                          <p className="text-sm text-gray-500">📱 {participant?.whatsapp ?? 'N/A'}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        {participant?.estimatedBirthDate ? (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="inline-block px-3 py-1 bg-gradient-to-r from-purple-200 to-purple-300 text-purple-900 rounded-full text-sm font-bold shadow-md"
+                          >
+                            {new Date(participant.estimatedBirthDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                          </motion.div>
+                        ) : (
+                          <span className="text-gray-400">-</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        {participant?.itemName ? (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="inline-block px-4 py-2 bg-gradient-to-r from-pink-200 to-pink-300 text-pink-900 rounded-full text-sm font-bold shadow-md"
+                          >
+                            🎀 {participant.itemName}
+                          </motion.span>
+                        ) : participant?.pixValue ? (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="inline-block px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-300 text-blue-900 rounded-full text-sm font-bold shadow-md"
+                          >
+                            💳 PIX Doado
+                          </motion.span>
+                        ) : (
+                          <span className="text-gray-400">-</span>
+                        )}
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
       )}
     </motion.div>
   );
