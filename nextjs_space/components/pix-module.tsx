@@ -25,12 +25,21 @@ export default function PixModule({
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [customValue, setCustomValue] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCopyPix = async () => {
     await navigator.clipboard.writeText(PIX_CODE);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCustomValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, '');
+    setCustomValue(raw);
+    if (raw && parseInt(raw) > 0) {
+      onValueSelect(parseInt(raw));
+    }
   };
 
   const handleFileSelect = async (file: File | null) => {
@@ -115,11 +124,11 @@ export default function PixModule({
               <motion.button
                 key={option.value}
                 type="button"
-                onClick={() => onValueSelect(option.value)}
+                onClick={() => { onValueSelect(option.value); setCustomValue(''); }}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className={`p-3 rounded-lg font-semibold transition-all duration-300 ${
-                  selectedValue === option.value
+                  selectedValue === option.value && !customValue
                     ? 'bg-gradient-to-br from-blue-400 to-blue-500 text-white shadow-elevated ring-2 ring-blue-300'
                     : 'bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-elegant'
                 }`}
@@ -127,6 +136,26 @@ export default function PixModule({
                 {option.label}
               </motion.button>
             ))}
+          </div>
+
+          {/* Custom value */}
+          <div className="mt-4 flex items-center gap-3">
+            <label className="text-sm font-semibold text-gray-700 whitespace-nowrap">Outro valor:</label>
+            <div className={`flex items-center gap-2 flex-1 border-2 rounded-lg px-3 py-2 bg-white transition-colors ${
+              customValue && parseInt(customValue) > 0
+                ? 'border-blue-400 ring-2 ring-blue-200'
+                : 'border-gray-300'
+            }`}>
+              <span className="text-gray-500 font-semibold">R$</span>
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder="0"
+                value={customValue}
+                onChange={handleCustomValueChange}
+                className="flex-1 outline-none text-gray-900 font-semibold bg-transparent"
+              />
+            </div>
           </div>
         </div>
 
