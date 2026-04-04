@@ -104,7 +104,7 @@ export default function ItemForm() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-elegant border border-white border-opacity-50"
+          className="bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl p-4 md:p-8 shadow-elegant border border-white border-opacity-50 overflow-hidden"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
@@ -143,7 +143,7 @@ export default function ItemForm() {
                 onChange={(e) => setEstimatedBirthDate(e.target.value)}
                 min={EARLIEST_DATE}
                 max={LATEST_DATE}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-pink-500 focus:outline-none transition-colors bg-white focus:ring-2 focus:ring-pink-200"
+                className="w-full max-w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-pink-500 focus:outline-none transition-colors bg-white focus:ring-2 focus:ring-pink-200 box-border"
                 required
               />
               <p className="text-xs text-gray-500 mt-1">

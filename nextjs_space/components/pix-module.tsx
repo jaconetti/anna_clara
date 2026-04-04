@@ -45,8 +45,8 @@ export default function PixModule({
   const handleFileSelect = async (file: File | null) => {
     if (!file) return;
 
-    if (!file.type.startsWith('image/')) {
-      setUploadError('Por favor, selecione uma imagem válida');
+    if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+      setUploadError('Por favor, selecione uma imagem ou PDF válido');
       return;
     }
 
@@ -111,7 +111,7 @@ export default function PixModule({
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
     >
-      <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-elegant border border-white border-opacity-50">
+      <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl p-4 md:p-8 shadow-elegant border border-white border-opacity-50 overflow-hidden">
         <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
           <DollarSign className="w-6 h-6" />
           ou Contribua com PIX
@@ -139,9 +139,9 @@ export default function PixModule({
           </div>
 
           {/* Custom value */}
-          <div className="mt-4 flex items-center gap-3">
-            <label className="text-sm font-semibold text-gray-700 whitespace-nowrap">Outro valor:</label>
-            <div className={`flex items-center gap-2 flex-1 border-2 rounded-lg px-3 py-2 bg-white transition-colors ${
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 w-full min-w-0">
+            <label className="text-sm font-semibold text-gray-700 sm:whitespace-nowrap flex-shrink-0">Outro valor:</label>
+            <div className={`flex items-center gap-2 w-full min-w-0 border-2 rounded-lg px-3 py-2 bg-white transition-colors ${
               customValue && parseInt(customValue) > 0
                 ? 'border-blue-400 ring-2 ring-blue-200'
                 : 'border-gray-300'
@@ -193,7 +193,7 @@ export default function PixModule({
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept="image/*,application/pdf"
               onChange={(e) => handleFileSelect(e?.target?.files?.[0] ?? null)}
               className="hidden"
             />
@@ -216,7 +216,7 @@ export default function PixModule({
                   <>
                     <Upload className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
                     <p className="text-gray-700 font-medium">Clique para fazer upload</p>
-                    <p className="text-xs text-gray-500 mt-1">PNG, JPG ou GIF (máx. 5MB)</p>
+                    <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF ou PDF (máx. 5MB)</p>
                   </>
                 )}
               </motion.div>
