@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const dynamic = "force-dynamic";
-
-const metadataBase = new URL(
-  process.env.NEXTAUTH_URL || "http://localhost:3000"
-);
+const metadataBase = process.env.VERCEL_URL
+  ? new URL(`https://${process.env.VERCEL_URL}`)
+  : new URL("http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase,
@@ -36,11 +35,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <head>
-        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js"></script>
-      </head>
       <body className={`${inter.className} bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50`}>
         {children}
+        <Script src="https://apps.abacus.ai/chatllm/appllm-lib.js" strategy="afterInteractive" />
       </body>
     </html>
   );
