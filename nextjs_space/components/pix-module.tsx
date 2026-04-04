@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DollarSign, Upload, X, AlertCircle, CheckCircle } from 'lucide-react';
 import { PIX_VALUES } from '@/lib/constants';
-import Image from 'next/image';
 
 interface PixModuleProps {
   selectedValue: number | null;
@@ -165,16 +164,6 @@ export default function PixModule({
                 animate={{ opacity: 1, scale: 1 }}
                 className="space-y-3"
               >
-                {previewUrl && (
-                  <div className="relative w-full h-48 rounded-lg overflow-hidden shadow-elegant">
-                    <Image
-                      src={previewUrl}
-                      alt="Comprovante PIX"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
                 <div className="flex items-center gap-2 p-3 bg-green-100 border border-green-300 rounded-lg">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
                   <span className="text-green-800 font-medium">Comprovante enviado com sucesso!</span>

@@ -69,15 +69,16 @@ export default function ItemsGrid({ selectedItem, onItemSelect }: ItemsGridProps
         variants={containerVariants}
       >
         {ITEMS.map((item, index) => {
-          const isChosen = chosenItems.includes(item);
-          const isSelected = selectedItem === item;
+          const isChosen = chosenItems.includes(item.name);
+          const isSelected = selectedItem === item.name;
           const colorClass = COLOR_PALETTE[index % COLOR_PALETTE.length];
 
           return (
             <motion.button
-              key={item}
+              key={item.name}
+              type="button"
               variants={itemVariants}
-              onClick={() => !isChosen && onItemSelect(item)}
+              onClick={() => !isChosen && onItemSelect(item.name)}
               disabled={isChosen && !isSelected}
               whileHover={!isChosen ? { y: -4 } : {}}
               whileTap={!isChosen ? { scale: 0.95 } : {}}
@@ -97,7 +98,10 @@ export default function ItemsGrid({ selectedItem, onItemSelect }: ItemsGridProps
               )}
               <Gift className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
               <span className="text-sm font-semibold text-gray-900 text-center leading-tight">
-                {item}
+                {item.name}
+              </span>
+              <span className="text-xs text-gray-500 text-center">
+                Em torno de {item.price}
               </span>
               {isChosen && !isSelected && (
                 <span className="text-xs text-gray-600 font-medium">Já escolhido</span>

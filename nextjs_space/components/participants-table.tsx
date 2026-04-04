@@ -121,7 +121,7 @@ export default function ParticipantsTable() {
                           transition={{ delay: index * 0.1 }}
                           className="inline-block px-3 py-1 bg-gradient-to-r from-purple-200 to-purple-300 text-purple-900 rounded-full text-sm font-bold shadow-md"
                         >
-                          {new Date(participant.estimatedBirthDate).toLocaleDateString('pt-BR')}
+                          {new Date(participant.estimatedBirthDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
                         </motion.div>
                       ) : (
                         <span className="text-gray-400">-</span>

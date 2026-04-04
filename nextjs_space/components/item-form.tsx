@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, AlertCircle, CheckCircle, Loader } from 'lucide-react';
+import { Send, AlertCircle, CheckCircle, Loader, X, Heart } from 'lucide-react';
 import { ITEMS, PIX_VALUES, EARLIEST_DATE, LATEST_DATE } from '@/lib/constants';
 import ItemsGrid from './items-grid';
 import PixModule from './pix-module';
@@ -16,6 +16,7 @@ export default function ItemForm() {
   const [receiptPath, setReceiptPath] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const isFormValid = name.trim() && whatsapp.trim() && estimatedBirthDate && (selectedItem || (pixValue && receiptPath));
 
@@ -47,15 +48,13 @@ export default function ItemForm() {
         throw new Error(error.error || 'Erro ao registrar');
       }
 
-      setMessage({ type: 'success', text: 'Registrado com sucesso! Obrigado por participar! 🎉' });
+      setShowSuccessModal(true);
       setName('');
       setWhatsapp('');
       setEstimatedBirthDate('');
       setSelectedItem(null);
       setPixValue(null);
       setReceiptPath(null);
-
-      setTimeout(() => setMessage(null), 5000);
     } catch (error) {
       setMessage({
         type: 'error',
@@ -136,7 +135,7 @@ export default function ItemForm() {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-2">
-                Seu Palpite - Data de Nascimento 🎰 *
+                Seu Palpite - Data de Nascimento *
               </label>
               <input
                 type="date"
@@ -210,6 +209,57 @@ export default function ItemForm() {
           )}
         </motion.button>
       </form>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+            onClick={() => setShowSuccessModal(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="absolute top-4 right-4 p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center">
+                  <Heart className="w-8 h-8 text-pink-500" fill="currentColor" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Presente Registrado! 🎉</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Entre em contato com a <span className="font-semibold text-pink-600">Gaby</span> ou{' '}
+                    <span className="font-semibold text-pink-600">Jé</span> para alinhar modelo e forma de entrega.
+                  </p>
+                  <p className="text-gray-600 mt-3 leading-relaxed">
+                    Agradecemos muito seu mimo para a <span className="font-semibold text-pink-600">Clarinha</span>. 💕
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="mt-2 px-8 py-3 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-semibold rounded-lg shadow-elegant hover:shadow-elevated transition-all duration-300"
+                >
+                  Fechar
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
