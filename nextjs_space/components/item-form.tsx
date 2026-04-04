@@ -143,7 +143,7 @@ export default function ItemForm() {
                 onChange={(e) => setEstimatedBirthDate(e.target.value)}
                 min={EARLIEST_DATE}
                 max={LATEST_DATE}
-                className="w-full max-w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-pink-500 focus:outline-none transition-colors bg-white focus:ring-2 focus:ring-pink-200 box-border"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-pink-500 focus:outline-none transition-colors bg-white focus:ring-2 focus:ring-pink-200"
                 required
               />
               <p className="text-xs text-gray-500 mt-1">
