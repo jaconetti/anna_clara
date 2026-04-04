@@ -2,8 +2,11 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DollarSign, Upload, X, AlertCircle, CheckCircle } from 'lucide-react';
+import { DollarSign, Upload, X, AlertCircle, CheckCircle, Copy, Check } from 'lucide-react';
+import Image from 'next/image';
 import { PIX_VALUES } from '@/lib/constants';
+
+const PIX_CODE = '00020126580014BR.GOV.BCB.PIX013672a966c3-088a-49ff-ab3e-6cd8537d43eb5204000053039865802BR5925Gabrielle Barsotti Jacone6009SAO PAULO62140510OFZOL5LGN563048FDE';
 
 interface PixModuleProps {
   selectedValue: number | null;
@@ -21,7 +24,14 @@ export default function PixModule({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleCopyPix = async () => {
+    await navigator.clipboard.writeText(PIX_CODE);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleFileSelect = async (file: File | null) => {
     if (!file) return;
@@ -127,6 +137,29 @@ export default function PixModule({
             exit={{ opacity: 0, y: -10 }}
             className="space-y-4"
           >
+            {/* QR Code + PIX code */}
+            <div className="flex flex-col items-center gap-4 p-6 bg-blue-50 rounded-xl border border-blue-200">
+              <p className="text-sm font-semibold text-gray-700">Escaneie o QR Code ou copie o código PIX:</p>
+              <Image
+                src="/QRCODE.png"
+                alt="QR Code PIX"
+                width={200}
+                height={200}
+                className="rounded-lg border border-blue-200 shadow-sm"
+              />
+              <div className="w-full flex items-center gap-2 bg-white border border-blue-200 rounded-lg px-3 py-2">
+                <p className="text-xs text-gray-500 font-mono truncate flex-1">{PIX_CODE}</p>
+                <button
+                  type="button"
+                  onClick={handleCopyPix}
+                  className="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold rounded-md transition-colors"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? 'Copiado!' : 'Copiar'}
+                </button>
+              </div>
+            </div>
+
             <p className="text-sm font-semibold text-gray-900">Comprovante PIX *</p>
             <input
               ref={fileInputRef}
