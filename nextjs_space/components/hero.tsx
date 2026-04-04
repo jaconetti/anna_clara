@@ -61,8 +61,8 @@ export default function Hero() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-pink-200 rounded-full blur-3xl opacity-20"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-20"></div>
 
-      {/* Floating baby elements - left side */}
-      <motion.div className="absolute left-0 top-32 space-y-16">
+      {/* Floating baby elements - left side (hidden on mobile) */}
+      <motion.div className="hidden lg:block absolute left-0 top-32 space-y-16">
         {babyEmojis.slice(0, 3).map((emoji, i) => (
           <motion.div
             key={`left-${i}`}
@@ -77,8 +77,8 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      {/* Floating baby elements - right side */}
-      <motion.div className="absolute right-0 top-40 space-y-20">
+      {/* Floating baby elements - right side (hidden on mobile) */}
+      <motion.div className="hidden lg:block absolute right-0 top-40 space-y-20">
         {babyEmojis.slice(3, 6).map((emoji, i) => (
           <motion.div
             key={`right-${i}`}
@@ -115,10 +115,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold mb-6 text-gray-900"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-gray-900"
         >
           <span className="block mb-2">Bolão da</span>
-          <span className="text-gradient text-6xl md:text-8xl">{MOTHER_NAME}</span>
+          <span className="text-gradient text-5xl sm:text-6xl md:text-8xl">{MOTHER_NAME}</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -138,7 +138,9 @@ export default function Hero() {
           transition={{ delay: 0.7, duration: 0.6 }}
           className="mb-12"
         >
-          <div className="inline-block bg-white bg-opacity-80 backdrop-blur-md rounded-2xl px-8 py-6 shadow-elegant border-2 border-pink-200">
+          <div
+            className="inline-block w-full sm:w-auto bg-white bg-opacity-80 backdrop-blur-md rounded-2xl px-4 sm:px-8 py-6 shadow-elegant border-2 border-pink-200"
+          >
             <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
               <div className="flex items-center gap-3">
                 <span className="text-4xl">🎯</span>
@@ -167,22 +169,18 @@ export default function Hero() {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="flex gap-4 justify-center flex-wrap"
         >
-          <motion.a
+          <a
             href="#bolao"
-            whileHover={{ scale: 1.08, y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bold rounded-full shadow-elevated hover:shadow-xl transition-all duration-300 text-lg"
+            className="px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bold rounded-full shadow-elevated hover:shadow-xl hover:scale-105 hover:-translate-y-1 active:scale-95 transition-all duration-300 text-lg inline-block"
           >
             🎰 Faça seu Palpite
-          </motion.a>
-          <motion.a
+          </a>
+          <a
             href="#participantes"
-            whileHover={{ scale: 1.08, y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-purple-300 to-blue-300 text-gray-900 font-bold rounded-full shadow-elevated hover:shadow-xl transition-all duration-300 text-lg"
+            className="px-8 py-4 bg-gradient-to-r from-purple-300 to-blue-300 text-gray-900 font-bold rounded-full shadow-elevated hover:shadow-xl hover:scale-105 hover:-translate-y-1 active:scale-95 transition-all duration-300 text-lg inline-block"
           >
             👥 Ver Participantes
-          </motion.a>
+          </a>
         </motion.div>
       </motion.div>
     </section>

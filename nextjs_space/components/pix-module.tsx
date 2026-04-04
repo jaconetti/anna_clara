@@ -110,7 +110,7 @@ export default function PixModule({
 
         <div className="mb-8">
           <p className="text-sm font-semibold text-gray-900 mb-4">Escolha um valor:</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {PIX_VALUES.map((option) => (
               <motion.button
                 key={option.value}
@@ -145,7 +145,7 @@ export default function PixModule({
                 alt="QR Code PIX"
                 width={200}
                 height={200}
-                className="rounded-lg border border-blue-200 shadow-sm"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-lg border border-blue-200 shadow-sm"
               />
               <div className="w-full flex items-center gap-2 bg-white border border-blue-200 rounded-lg px-3 py-2">
                 <p className="text-xs text-gray-500 font-mono truncate flex-1">{PIX_CODE}</p>

@@ -112,7 +112,7 @@ export default function HowItWorks() {
             <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300`} />
             
             {/* Card */}
-            <div className="relative h-full bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 shadow-elegant hover:shadow-elevated transition-all duration-300 border border-white border-opacity-50">
+            <div className="relative h-full bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-elegant hover:shadow-elevated transition-all duration-300 border border-white border-opacity-50">
               {/* Number badge */}
               <motion.div
                 variants={numberVariants}

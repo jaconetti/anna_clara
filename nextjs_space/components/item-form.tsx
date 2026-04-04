@@ -225,7 +225,7 @@ export default function ItemForm() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button

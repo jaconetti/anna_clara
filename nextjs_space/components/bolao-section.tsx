@@ -92,7 +92,7 @@ export default function BolaoSection() {
           {/* Date Range */}
           <motion.div
             whileHover={{ y: -5 }}
-            className="text-center border-l-2 border-r-2 border-pink-200 px-4"
+            className="text-center md:border-l-2 md:border-r-2 border-pink-200 md:px-4"
           >
             <div className="text-5xl mb-4">📅</div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Período de Palpites</h3>
