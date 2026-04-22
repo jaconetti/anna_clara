@@ -273,15 +273,6 @@ export default function ParticipantsTable() {
   );
 }
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 }
-  }
-};
-
 const rowVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: (i: number) => ({
