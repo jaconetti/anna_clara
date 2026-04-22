@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, AlertCircle, CheckCircle, Loader, X, Heart } from 'lucide-react';
-import { ITEMS, PIX_VALUES, EARLIEST_DATE, LATEST_DATE } from '@/lib/constants';
+import { Send, AlertCircle, CheckCircle, Loader, X, Heart, Clock } from 'lucide-react';
+import { ITEMS, PIX_VALUES, EARLIEST_DATE, LATEST_DATE, REGISTRATION_DEADLINE_DISPLAY } from '@/lib/constants';
 import ItemsGrid from './items-grid';
 import PixModule from './pix-module';
 
@@ -96,6 +96,10 @@ export default function ItemForm() {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Adivinhe a data de nascimento da Anna Clara, escolha um item especial ou contribua via PIX!
         </p>
+        <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-yellow-50 border border-yellow-300 rounded-full text-sm font-semibold text-yellow-800">
+          <Clock className="w-4 h-4 flex-shrink-0" />
+          Participe até {REGISTRATION_DEADLINE_DISPLAY}
+        </div>
       </motion.div>
 
       <form onSubmit={handleSubmit} className="space-y-8">

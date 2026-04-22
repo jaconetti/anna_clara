@@ -1,28 +1,5 @@
 export const ITEMS = [
-  { name: "Banheira", price: "R$ 180,00" },
-  { name: "Trocador", price: "R$ 62,00" },
-  { name: "Almofada amamentação", price: "R$ 50,00" },
-  { name: "Berço de acoplar na cama", price: "R$ 450,00" },
-  { name: "Lençol", price: "R$ 52,00" },
-  { name: "Cobertor", price: "R$ 76,00" },
-  { name: "Cueiro", price: "R$ 30,00" },
-  { name: "Fralda de pano", price: "R$ 65,00" },
-  { name: "Lixeira anti odor", price: "R$ 115,00" },
-  { name: "Kit higiene", price: "R$ 136,00" },
-  { name: "Saída maternidade", price: "R$ 100,00" },
-  { name: "Porta maternidade", price: "R$ 22,00" },
-  { name: "Chupeta", price: "R$ 63,00" },
-  { name: "Saquinho pra roupas pra maternidade", price: "R$ 46,00" },
-  { name: "Meias", price: "R$ 30,00" },
-  { name: "Toucas", price: "R$ 50,00" },
-  { name: "Cesto de roupa suja", price: "R$ 20,00" },
-  { name: "Cortina pro quarto", price: "R$ 100,00" },
-  { name: "Decoração parede do quarto", price: "R$ 80,00" },
-  { name: "Organizadores para gaveta de fralda", price: "R$ 35,00" },
-  { name: "Aspirador nasal", price: "R$ 45,00" },
-  { name: "Soro fisiológico pra lavar nariz", price: "R$ 35,00" },
-  { name: "Necessaire", price: "R$ 49,00" },
-  { name: "Kit unha e cabelo", price: "R$ 22,00" }
+  { name: "Presente Misterioso", price: null }
 ];
 
 export const PASTEL_COLORS = {
@@ -53,6 +30,14 @@ export const PIX_VALUES = [
 export const DUE_DATE = "2026-06-12";
 export const DUE_DATE_DISPLAY = "12 de junho de 2026";
 export const MOTHER_NAME = "Anna Clara";
+
+// Prazo para participar
+export const REGISTRATION_DEADLINE = "2026-05-20";
+export const REGISTRATION_DEADLINE_DISPLAY = "20 de maio de 2026";
+
+// Data real de nascimento - preencha aqui quando a bebê nascer para revelar o vencedor
+// Formato: "YYYY-MM-DD" ou null para manter em segredo
+export const ACTUAL_BIRTH_DATE: string | null = null;
 
 // Bolão - Data range for guesses
 export const EARLIEST_DATE = "2026-05-22";
